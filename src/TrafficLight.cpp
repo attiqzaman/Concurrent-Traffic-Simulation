@@ -73,7 +73,7 @@ void TrafficLight::cycleThroughPhases()
 
     auto lastClockTime = std::chrono::system_clock::now();
 
-    auto waitTime = (std::rand() % 6000) + 4000;
+    auto waitTime = (std::rand() % 2000) + 4000;
     std::cout << "waitTime " << waitTime << std::endl;
 
     while (true)
@@ -85,13 +85,13 @@ void TrafficLight::cycleThroughPhases()
 
         if(elapsedTimeSinceLastClockTime >= waitTime) {
             // toggle phaseLight
-            //_currentPhase = _currentPhase == TrafficLightPhase::red ? TrafficLightPhase::green : TrafficLightPhase::red;
+            _currentPhase = _currentPhase == TrafficLightPhase::red ? TrafficLightPhase::green : TrafficLightPhase::red;
 
             // send message to _queue
             _msgQueue.send(std::move(_currentPhase));
 
             lastClockTime = std::chrono::system_clock::now();
-            waitTime = (std::rand() % 6000) + 4000;
+            waitTime = (std::rand() % 2000) + 4000;
         }
     }
     
